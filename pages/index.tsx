@@ -184,11 +184,11 @@ const HomePage: NextPage<HomePageProps> = ({ malls, mallCountsByRegion, regionPa
         {/* Mall List Section */}
         <section>
           <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-6 text-center">
-            {searchQuery ? `'${searchQuery}' 검색 결과` : '전체 마켓 목록'}
+            {searchQuery ? `&apos;${searchQuery}&apos; 검색 결과` : '전체 마켓 목록'}
           </h2>
           {filteredMalls.length === 0 && searchQuery !== '' ? (
             <p className="text-center text-gray-600 text-lg mt-8">
-              '{searchQuery}'에 해당하는 마켓을 찾을 수 없습니다.
+              &apos;{searchQuery}&apos;에 해당하는 마켓을 찾을 수 없습니다.
             </p>
           ) : (
             // Use responsive grid columns for the mall list

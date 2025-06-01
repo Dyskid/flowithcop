@@ -2,7 +2,7 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import Link from 'next/link'; // Import Link for navigation
 import Head from 'next/head'; // For page title and meta tags
-import Layout from '../../components/Layout'; // Assuming Layout component exists
+import Layout from '../components/Layout'; // Assuming Layout component exists
 import path from 'path';
 import { promises as fs } from 'fs';
 import dayjs from 'dayjs'; // Using dayjs for date formatting
