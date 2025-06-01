@@ -6,8 +6,7 @@ import InteractiveMap from '../components/InteractiveMap';
 import SearchBar from '../components/SearchBar'; // Import the search bar
 import path from 'path';
 import { promises as fs } from 'fs';
-import Fuse from 'fuse.js'; // Import Fuse.js
-import { useState, useMemo, useEffect } from 'react'; // Import hooks
+import { useState, useEffect } from 'react'; // Import hooks
 
 // Define the interface for the mall data structure based on the reference
 interface MallType {
@@ -135,31 +134,26 @@ const HomePage: NextPage<HomePageProps> = ({ malls, mallCountsByRegion, regionPa
      malls.map(m => ({ ...m, id: String(m.id) })) // Ensure IDs are strings
   );
 
-
-  // Memoize the Fuse instance for performance
-  const fuse = useMemo(() => {
-    const options = {
-      keys: ['name', 'region', 'tags', 'city'], // Added 'city' to search keys
-      threshold: 0.3, // Adjust threshold for fuzzy matching tolerance (0 is exact match, 1 is everything)
-      includeScore: false, // No need to include score
-    };
-     // Ensure mall IDs are strings when creating the index
-    return new Fuse(malls.map(m => ({ ...m, id: String(m.id) })), options);
-  }, [malls]); // Recreate Fuse instance only if the original 'malls' prop changes
-
   // Effect to perform search when searchQuery changes
   useEffect(() => {
     if (searchQuery.trim() === '') {
       // If query is empty, show all malls (ensure IDs are strings)
       setFilteredMalls(malls.map(m => ({ ...m, id: String(m.id) })));
     } else {
-      // Perform Fuse search
-      const result = fuse.search(searchQuery.trim());
-      // Fuse search returns results with an 'item' property which is the original object
+      // Perform simple search filtering
+      const query = searchQuery.trim().toLowerCase();
+      const filtered = malls.filter(mall => {
+        return (
+          mall.name.toLowerCase().includes(query) ||
+          mall.region.toLowerCase().includes(query) ||
+          (mall.city && mall.city.toLowerCase().includes(query)) ||
+          (mall.tags && mall.tags.some(tag => tag.toLowerCase().includes(query)))
+        );
+      });
       // Ensure IDs are strings in the filtered results
-      setFilteredMalls(result.map(r => ({ ...r.item, id: String(r.item.id) })));
+      setFilteredMalls(filtered.map(m => ({ ...m, id: String(m.id) })));
     }
-  }, [searchQuery, malls, fuse]); // Dependencies: searchQuery, original malls list, and fuse instance
+  }, [searchQuery, malls]); // Dependencies: searchQuery, original malls list
 
   // Handler for the search bar input change
   const handleSearchChange = (query: string) => {

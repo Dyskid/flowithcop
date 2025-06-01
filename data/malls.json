@@ -1,0 +1,41 @@
+[
+  {
+    "id": "1",
+    "name": "서울특별시 온라인 마켓",
+    "url": "https://example.com/seoul",
+    "region": "서울특별시",
+    "city": "서울",
+    "tags": ["농산물", "특산품"],
+    "featured": true,
+    "isNew": false,
+    "statusPopular": true,
+    "lastVerified": "2024-01-15",
+    "description": "서울시 지역 특산품을 판매하는 온라인 마켓입니다."
+  },
+  {
+    "id": "2",
+    "name": "부산광역시 수산물 직거래",
+    "url": "https://example.com/busan",
+    "region": "부산광역시",
+    "city": "부산",
+    "tags": ["수산물", "해산물"],
+    "featured": true,
+    "isNew": true,
+    "statusPopular": true,
+    "lastVerified": "2024-01-20",
+    "description": "부산 지역 신선한 수산물을 직거래하는 온라인 플랫폼입니다."
+  },
+  {
+    "id": "3",
+    "name": "경기도 로컬푸드 마켓",
+    "url": "https://example.com/gyeonggi",
+    "region": "경기도",
+    "city": "수원",
+    "tags": ["농산물", "로컬푸드"],
+    "featured": false,
+    "isNew": false,
+    "statusPopular": true,
+    "lastVerified": "2024-01-18",
+    "description": "경기도 지역 농산물을 판매하는 로컬푸드 마켓입니다."
+  }
+]
